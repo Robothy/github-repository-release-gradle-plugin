@@ -27,7 +27,7 @@ repositories {
 gradlePlugin {
     plugins {
         githubRepositoryReleasePlugin {
-            id = 'github-repository-release-plugin'
+            id = 'com.robothy.github-repository-release-plugin'
             implementationClass = 'com.robothy.platform.release.gradle.plugin.PlatformReleasePlugin'
             displayName = 'Github Repository Release Plugin'
         }
