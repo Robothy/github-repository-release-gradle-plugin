@@ -19,9 +19,9 @@ pluginManagement {
             }
         }
 
-        maven {
-            url = 'https://nexus.ship.gov.sg/repository/maven2-gradle/'
-        }
+//        maven {
+//            url = 'https://nexus.ship.gov.sg/repository/maven2-gradle/'
+//        }
         gradlePluginPortal()
     }
 }
