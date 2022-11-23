@@ -1,5 +1,7 @@
 package com.robothy.platform.release.gradle.task;
 
+import org.gradle.api.tasks.Input;
+
 /**
  * Update the {@code version} property of gradle.properties.
  * Remove the "-SNAPSHOT" suffix.

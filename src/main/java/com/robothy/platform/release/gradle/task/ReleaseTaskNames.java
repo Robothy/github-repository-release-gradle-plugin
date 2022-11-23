@@ -8,7 +8,7 @@ public enum ReleaseTaskNames {
   /**
    * release task.
    */
-  RELEASE("release", "Release current project. This task only available on the root project. Set '-PRELEASE=ture' if you want to publish a formal version."),
+  RELEASE("release", "Release current project."),
 
   /**
    * Release version task.

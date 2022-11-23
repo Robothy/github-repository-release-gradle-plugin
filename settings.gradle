@@ -2,14 +2,15 @@ pluginManagement {
 
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id.startsWith('robothy-platform')) {
-                useModule("com.robothy:platform-gradle-plugins:${robothyPlatformGradlePluginsVersion}")
+            if (requested.id.id.equals('robothy-platform-release')) {
+                useModule("com.robothy:platform-release-gradle-plugin:${robothyPlatformReleaseGradlePluginVersion}")
             }
         }
     }
 
     repositories {
         mavenLocal()
+
         maven {
             url = 'https://maven.pkg.github.com/robothy-platform/maven'
             credentials {
@@ -17,9 +18,13 @@ pluginManagement {
                 password = "${GITHUB_TOKEN}"
             }
         }
+
+        maven {
+            url = 'https://nexus.ship.gov.sg/repository/maven2-gradle/'
+        }
         gradlePluginPortal()
     }
 }
 
 
-rootProject.name = 'platform-release-gradle-plugin'
+rootProject.name = 'github-repository-release-gradle-plugin'

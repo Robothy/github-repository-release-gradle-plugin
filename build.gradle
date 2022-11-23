@@ -1,6 +1,11 @@
 plugins {
-    id 'robothy-platform'
+    id 'java-gradle-plugin'
+    id "com.gradle.plugin-publish" version "1.0.0"
+    id 'maven-publish'
+    id 'robothy-platform-release'
 }
+
+group = 'com.robothy'
 
 dependencies {
     compileOnly "org.projectlombok:lombok:1.18.18"
@@ -13,26 +18,23 @@ dependencies {
 }
 
 repositories {
-    maven {
-        url = 'https://maven.pkg.github.com/robothy-platform/maven'
-        credentials {
-            username = "${GITHUB_USERNAME}"
-            password = "${GITHUB_TOKEN}"
+    mavenLocal()
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        githubRepositoryReleasePlugin {
+            id = 'github-repository-release-plugin'
+            implementationClass = 'com.robothy.platform.release.gradle.plugin.PlatformReleasePlugin'
+            displayName = 'Github Repository Release Plugin'
         }
     }
 }
 
-gradlePlugin {
-
-//    testSourceSets(sourceSets.functionalTest)
-
-    plugins {
-
-        robothyPlatform {
-            id = 'robothy-platform-release'
-            implementationClass = 'com.robothy.platform.release.gradle.plugin.PlatformReleasePlugin'
-            displayName = 'Robothy Platform Release Plugin'
-        }
-
-    }
+pluginBundle {
+    website = 'https://github.com/Robothy/github-repository-release-plugin'
+    vcsUrl = 'https://github.com/Robothy/github-repository-release-plugin'
+    description = 'Automaticall update gradle project version. Add tag and push to remote github repository.'
+    tags = ['GitHub', 'Version Management', 'Tag', 'Git']
 }

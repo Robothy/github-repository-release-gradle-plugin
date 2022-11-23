@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import org.gradle.api.Action;
 import org.gradle.api.logging.Logging;
-import org.gradle.api.tasks.Exec;
 import org.slf4j.Logger;
 
 /**
  * Register release task.
  */
-public class ReleaseTaskAction implements Action<Exec> {
+public class ReleaseTaskAction implements Action<ReleaseTask> {
 
   private static final Logger log = Logging.getLogger(ReleaseTaskAction.class);
 
   @Override
-  public void execute(Exec exec) {
+  public void execute(ReleaseTask exec) {
     exec.setWorkingDir(exec.getProject().getProjectDir());
 
     exec.doFirst(task -> {
       String version = exec.getProject().getVersion().toString();
       List<String> cmd = new ArrayList<>();
-      cmd.add("git config user.name 'CI Pipeline'");
-      cmd.add("git config user.email 'bot@robothy.com'");
+      cmd.add("git config user.name '" + exec.getCommitUserName() + "'");
+      cmd.add("git config user.email '" + exec.getCommitUserEmail() + "'");
       tag(cmd, version);
 
       GetGitWorkingBranch gitWorkingBranchTask =
