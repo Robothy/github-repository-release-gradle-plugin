@@ -45,21 +45,25 @@ jobs:
           echo "gradle.publish.secret=${{secrets.GRADLE_PUBLISH_SECRET}}" >> ~/.gradle/gradle.properties
           chmod +x gradlew
 
+      - name: Update release version
+        run: |
+          ./gradlew releaseVersion
+
       - name: Release
         if: ${{inputs.gradleLogLevel == 'None'}}
-        run: ./gradlew check release -Prelease=true
+        run: ./gradlew check release
 
       - name: Release(Info)
         if: ${{inputs.gradleLogLevel == 'Info'}}
-        run: ./gradlew check release -Prelease=true --info
+        run: ./gradlew check release
 
       - name: Release(Debug)
         if: ${{inputs.gradleLogLevel == 'Debug'}}
-        run: ./gradlew check release -Prelease=true --debug
+        run: ./gradlew check release
 
       - name: Release(Stacktrace)
         if: ${{inputs.gradleLogLevel == 'Stacktrace'}}
-        run: ./gradlew check release -Prelease=true --stacktrace
+        run: ./gradlew check release
 
       - name: Clear sensitive files
         run: |
