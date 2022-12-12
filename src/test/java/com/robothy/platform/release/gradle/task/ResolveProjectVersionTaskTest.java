@@ -20,17 +20,11 @@ class ResolveProjectVersionTaskTest {
     File buildFile = new File(projectPath.toFile(), "build.gradle");
     File settingsFile = new File(projectPath.toFile(), "settings.gradle");
     File propFile = new File(projectPath.toFile(), "gradle.properties");
-    Files.writeString(buildFile.toPath(), """
-        plugins {
-          id 'robothy-platform-release'
-        }
-        """);
-    Files.writeString(settingsFile.toPath(), """
-        rootProject.name = 'test-resolve-project-version'
-        """);
-    Files.writeString(propFile.toPath(), """
-        version=1.0
-        """);
+    Files.writeString(buildFile.toPath(), "plugins {" +
+          "id 'com.robothy.github-repository-release-plugin'" +
+        "}");
+    Files.writeString(settingsFile.toPath(), "rootProject.name = 'test-resolve-project-version'");
+    Files.writeString(propFile.toPath(), "version=1.0");
 
     projectPath.toFile().deleteOnExit();
     buildFile.deleteOnExit();
