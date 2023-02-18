@@ -43,3 +43,7 @@ pluginBundle {
     description = 'Automaticall update gradle project version. Add tag and push to remote github repository.'
     tags = ['GitHub', 'Version Management', 'Tag', 'Git']
 }
+
+test {
+    useJUnitPlatform()
+}

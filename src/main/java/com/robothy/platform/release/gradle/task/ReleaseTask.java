@@ -12,7 +12,7 @@ public class ReleaseTask extends Exec {
 
 
   @Input
-  private String commitUserName = "Github Release Plugin";
+  private String commitUserName = "Github Release Plugin: ";
 
   @Input
   private String commitUserEmail = "bot@github.com";
