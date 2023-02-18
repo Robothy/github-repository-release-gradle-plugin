@@ -26,7 +26,7 @@ public class ReleaseTaskAction implements Action<ReleaseTask> {
 
       GetGitWorkingBranch gitWorkingBranchTask =
           (GetGitWorkingBranch) task.getProject().getTasks().findByName(ReleaseTaskNames.GET_GIT_WORKING_BRANCH.getName());
-      commitNextVersion(cmd, version, gitWorkingBranchTask.getWorkingBranch());
+      commitNextVersion(cmd, exec.getProject().getRootProject().getName(), version, gitWorkingBranchTask.getWorkingBranch());
       exec.commandLine("sh", "-c", String.join(" && ", cmd));
     });
   }
@@ -36,9 +36,9 @@ public class ReleaseTaskAction implements Action<ReleaseTask> {
     cmd.add("git push origin " + version);
   }
 
-  private void commitNextVersion(List<String> cmd, String version, String workingBranch) {
+  private void commitNextVersion(List<String> cmd, String projectName, String version, String workingBranch) {
     cmd.add("git add ./gradle.properties");
-    cmd.add("git commit -m '" + version + " released.'");
+    cmd.add("git commit -m '" + projectName + " " + version + " released.'");
     cmd.add("git push origin " + workingBranch);
   }
 
